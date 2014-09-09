@@ -6,7 +6,7 @@ author:             Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>
 maintainer:         Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>
 copyright:          Copyright (C) 2014 Tony Morris
 synopsis:           An executable and library to determine if a file is a DICOM file 
-category:           Data
+category:           System, Medical
 description:       
   An executable and library to determine if a file is a DICOM file
   .
