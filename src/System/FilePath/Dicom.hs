@@ -1,8 +1,10 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
 module System.FilePath.Dicom(
   isDicomFile
 , dicomFileR
-, dicomCodeFileR
-, codeFileR
+, dicomExitCodeFileR
+, exitCodeFileR
 , FileR(..)
 ) where
 
@@ -11,43 +13,43 @@ import Control.Monad(Monad(return))
 import Data.Bool(Bool)
 import Data.Char(Char)
 import Data.Eq(Eq((==)))
-import Data.Int(Int)
 import Data.Foldable(Foldable, any)
 import Data.Functor(Functor(fmap))
 import Data.Maybe(Maybe(Nothing, Just))
 import Data.Ord(Ord)
 import Prelude (($), Show)
 import System.Directory(doesFileExist, doesDirectoryExist, getPermissions, readable)
+import System.Exit(ExitCode(ExitFailure, ExitSuccess))
 import System.FilePath(FilePath)
 import System.IO(IO, Handle, hClose, hReady, hGetChar, hSeek, openFile, SeekMode(AbsoluteSeek), IOMode(ReadMode))
 
 data FileR =
-  DoesNotExist
+  IsNotDicom
+  | DoesNotExist
   | IsNotReadable
   | IsDirectory
-  | IsNotDicom
   | IsDicom
   deriving (Eq, Show, Ord)
 
-codeFileR ::
+exitCodeFileR ::
   FileR
-  -> Int
-codeFileR DoesNotExist =
-  1
-codeFileR IsNotReadable =
-  2
-codeFileR IsDirectory =
-  3
-codeFileR IsNotDicom =
-  4
-codeFileR IsDicom =
-  0
+  -> ExitCode
+exitCodeFileR IsNotDicom =
+  ExitFailure 1
+exitCodeFileR DoesNotExist =
+  ExitFailure 2
+exitCodeFileR IsNotReadable =
+  ExitFailure 3
+exitCodeFileR IsDirectory =
+  ExitFailure 4
+exitCodeFileR IsDicom =
+  ExitSuccess
 
-dicomCodeFileR ::
+dicomExitCodeFileR ::
   FilePath
-  -> IO Int
-dicomCodeFileR =
-  fmap codeFileR . dicomFileR
+  -> IO ExitCode
+dicomExitCodeFileR =
+  fmap exitCodeFileR . dicomFileR
 
 dicomFileR ::
   FilePath
