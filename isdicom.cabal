@@ -12,7 +12,7 @@ description:
   .
   Exit codes:
   .
-  * 0 - is DICOM file
+  * 0 - is a DICOM file
   .
   * 1 - is not a DICOM file
   .
