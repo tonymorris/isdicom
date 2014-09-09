@@ -1,5 +1,5 @@
 name:               isdicom
-version:            0.0.1
+version:            0.0.2
 license:            BSD3
 license-file:       LICENSE
 author:             Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>
@@ -13,9 +13,13 @@ description:
   Exit codes:
   .
   * 0 - is DICOM file
+  .
   * 1 - is not a DICOM file
+  .
   * 2 - file does not exist
+  .
   * 3 - file is not readable
+  .
   * 4 - file is a directory
 homepage:           https://github.com/tonymorris/isdicom
 bug-reports:        https://github.com/tonymorris/isdicom/issues
